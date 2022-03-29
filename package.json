@@ -1,0 +1,23 @@
+{
+  "name": "filemanager",
+  "version": "1.0.0",
+  "description": "API with NodeJS that allows you to transfer data from your computer to a S3 Bucket",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/srueda99/FileManager.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/srueda99/FileManager/issues"
+  },
+  "homepage": "https://github.com/srueda99/FileManager#readme",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.3"
+  }
+}
