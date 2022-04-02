@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<HTML>
+    <HEAD>
+        <META charset="UTF-8">
+        <TITLE>BIENVENIDO</TITLE>
+        <LINK rel="stylesheet" href="css/style.css">
+    </HEAD>
+    <BODY>
+        <H1>Has entrado a la API del DevOps más cotizado del mundo</H1>
+        <H3>Elige un Bucket</H3>
+        <SELECT name="buckets" id="buckets">
+            {{#each buckets}}
+                <OPTION value="{{this.Name}}">{{this.Name}}</OPTION>
+            {{/each}}
+        </SELECT>
+        <H3>Si eres mujer sube tus nudes,</H3>
+        <H3>Si eres hombre deja foto de tu tarjeta de crédito:</H3>
+        <FORM action="/upload" method="POST" enctype="multipart/form-data">
+            <INPUT type="file" name="file" id="file">
+            <BUTTON type="submit" name="upload" id="upload">Enviar</BUTTON>
+        </FORM>
+        <SCRIPT src="js/script.js"></SCRIPT>
+    </BODY>
+</HTML>
