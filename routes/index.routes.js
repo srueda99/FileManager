@@ -1,7 +1,7 @@
 // --- RENDER ROUTE ---
 // Imports
 const {Router} = require('express');
-const {getBuckets} = require('../aws');
+const {getBuckets, getObjects} = require('../aws');
 const router = Router();
 
 // Function to render the main page

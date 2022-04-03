@@ -20,6 +20,14 @@ const getBuckets = () => {
     return storage.listBuckets().promise();
 };
 
+// List all the objects in a bucket
+const getObjects = (bucket) => {
+    var bucketParams = {
+        Bucket: bucket,
+    };
+    return storage.listObjects(bucketParams).promise();
+}
+
 // Upload a file to the selected bucket
 const uploadToBucket = (bucket, file) => {
     var stream = fs.createReadStream(file.tempFilePath);
@@ -31,4 +39,4 @@ const uploadToBucket = (bucket, file) => {
     return storage.upload(params).promise();
 };
 
-module.exports = {getBuckets, uploadToBucket};
+module.exports = {getBuckets, getObjects, uploadToBucket};
