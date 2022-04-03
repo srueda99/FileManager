@@ -1,3 +1,4 @@
+// --- MAIN FILE ---
 // Imports
 const Server = require('./server');
 

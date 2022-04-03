@@ -1,3 +1,5 @@
+// --- FRONTEND SCRIPT ---
+// Get the elements of the HTML
 const uploadBtn = document.querySelector('#upload');
 uploadBtn.addEventListener('click', e => {
     e.preventDefault();
@@ -9,6 +11,7 @@ uploadBtn.addEventListener('click', e => {
     fileUp(formData);
 });
 
+// Function to connect with the Backend
 const fileUp = (formData) => {
     fetch('upload', {
         method: 'POST',

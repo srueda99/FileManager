@@ -1,3 +1,4 @@
+// --- SERVER CONFIGURATION FILE ---
 // Imports
 const express = require('express');
 const exphbs = require('express-handlebars');

@@ -1,3 +1,5 @@
+// --- UPLOAD ROUTE ---
+// Imports
 const {Router} = require('express');
 const {uploadToBucket} = require('../aws');
 const router = Router();
@@ -10,7 +12,7 @@ const verifyFile = (req, res, next) => {
     next();
 }
 
-// --- ROUTE ---
+// Function to upload the file
 router.post('/', verifyFile, async (req, res) => {
     console.log(req);
     const bucket = req.body.bucket;
