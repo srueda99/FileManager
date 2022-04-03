@@ -18,7 +18,6 @@ router.post('/', verifyFile, async (req, res) => {
     const result = await uploadToBucket(bucket, file);
     res.json(result);
     console.log('File uploaded.');
-    res.send('File uploaded');
 });
 
 module.exports = router;

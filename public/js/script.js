@@ -14,9 +14,10 @@ const fileUp = (formData) => {
         method: 'POST',
         body: formData
     })
-    .then(response => response.json())
+    .then(res => res.json())
     .then(data => {
         console.log(data);
     })
+    .catch(err => console.log(`There was en error: ${err}`))
 };
 console.log('Script running as expected');

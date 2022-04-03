@@ -3,6 +3,7 @@ const express = require('express');
 const exphbs = require('express-handlebars');
 const fileupload = require('express-fileupload');
 const dotenv = require('dotenv');
+const cors = require('cors');
 dotenv.config();
 
 // Create a class server with the server configurations
@@ -10,6 +11,7 @@ class Server {
     constructor() {
         this.app = express();
         this.port = process.env.PORT || '4040';
+        this.app.use(cors());
         this.setTemplateEngine();
         this.middlewares();
         this.routes();
@@ -29,7 +31,7 @@ class Server {
         this.app.use(express.json());
         this.app.use(fileupload({
             useTempFiles: true,
-            tempFileDir: '/temp/',
+            tempFileDir: 'temp',
             debug: true
         }));
     }
