@@ -25,15 +25,8 @@ const getObjects = (bucket) => {
     const bucketParams = {
         Bucket: bucket,
     };
-    storage.listObjects(bucketParams, (err, data) => {
-        if(err) {
-            console.log('Error: ', err);
-        }
-        else {
-            console.log('Data: ', data);
-        }
-    })
-}
+    return storage.listObjects(bucketParams).promise();
+};
 
 // Upload a file to the selected bucket
 const uploadToBucket = (bucket, file) => {

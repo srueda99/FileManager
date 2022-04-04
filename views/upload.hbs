@@ -11,7 +11,7 @@
         <DIV class="container" id="upload">
             <FORM>
                 <H3>Please select the Bucket</H3>
-                <SELECT style="width: 350px;" class="form-select form-select-sm" aria-label=".form-select-sm example" name="buckets" id="buckets">
+                <SELECT style="width: 350px;" class="form-select form-select-sm" aria-label=".form-select-sm example" name="buckets" id="bucketsUpload">
                     {{#each buckets}}
                         <OPTION value="{{this.Name}}">{{this.Name}}</OPTION>
                     {{/each}}
@@ -19,13 +19,13 @@
                 <SECTION style="margin-top: 30px;">
                     <H3>Now select the file to upload</H3>
                     <LABEL for="file">
-                        <IMG class="animation" id="img-upload" src="img/folder.png" alt="click-here-to-upload" height="150px" width="150px" onclick="prueba()">
+                        <IMG class="animation" id="img-upload" src="img/folder.png" alt="click-here-to-upload" height="150px" width="150px">
                     </LABEL>
                     <INPUT class="form-control" style="width: 400px; margin: 20px;" type="file" name="file" id="file">
                     <BUTTON class="btn btn-outline-warning" type="submit" id="uploadSbmt">SUBMIT</BUTTON>
                 </SECTION>
             </FORM>
         </DIV>
-        <SCRIPT src="js/script.js"></SCRIPT>
+        <SCRIPT src="js/script-upload.js"></SCRIPT>
     </BODY>
 </HTML>

@@ -42,7 +42,6 @@ class Server {
         this.app.use('/upload', require('./routes/upload.routes'));
         this.app.use('/delete', require('./routes/delete.routes'));
         this.app.use('/download', require('./routes/download.routes'));
-        this.app.use('/select', require('./routes/select.routes'));
     }
 
     listen() {
