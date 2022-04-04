@@ -1,7 +1,7 @@
 // --- UPLOAD ROUTE ---
 // Imports
 const {Router} = require('express');
-const {uploadToBucket} = require('../aws');
+const {uploadToBucket, getBuckets} = require('../aws');
 const router = Router();
 
 // Function to verify the POST is a file
@@ -12,7 +12,16 @@ const verifyFile = (req, res, next) => {
     next();
 }
 
-// Function to upload the file
+// (GET) Render the upload HTML page
+router.get('/', async (req, res) => {
+    const bucketsList = await getBuckets();
+    console.log(bucketsList.Buckets);
+    res.render('upload', {
+        buckets: bucketsList.Buckets
+    });
+});
+
+// (POST) Function to upload the file
 router.post('/', verifyFile, async (req, res) => {
     console.log(req);
     const bucket = req.body.bucket;

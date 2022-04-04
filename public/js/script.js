@@ -1,6 +1,6 @@
 // --- FRONTEND SCRIPT ---
 // Get the elements of the HTML
-const uploadBtn = document.querySelector('#upload');
+const uploadBtn = document.querySelector('#uploadSbmt');
 uploadBtn.addEventListener('click', e => {
     e.preventDefault();
     const bucket = document.querySelector('#buckets').value;
