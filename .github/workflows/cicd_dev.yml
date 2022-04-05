@@ -22,34 +22,33 @@ jobs:
           SSH_USER: ${{ secrets.SERVER_USER }}
           SSH_KEY: ${{ secrets.SSH_SERVER_KEY }}
           SSH_PORT: 22
-          - run: |
-            sudo mkdir /usr/app-dev2
-            sudo rm -R /usr/app-dev*
-            sudo mkdir /usr/app-dev
-            sudo apt update
-            sudo apt upgrade -y
-            sudo apt install awscli -y
-            sudo apt install nodejs -y
-            sudo apt install npm -y
-            sudo apt update
-            aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY }} --profile bucketmg
-            aws configure set aws_secret_access_key ${{ secrets.BKTMG_SECRET_KEY }} --profile bucketmg
-            aws configure set region ${{ secrets.AWS_REGION }} --profile bucketmg
-            aws configure set output json --profile bucketmg
-      - name: Deployment in home folder
-        uses: siva1024/scp-deployer@latest
-        with:
-          host: ${{ secrets.SERVER_ADDRESS }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SSH_SERVER_KEY }}
-          source: "./*"
-          target: "/home/${{ secrets.SERVER_USER }}/"
-      - name: Moving files to usr/app-dev
-        uses: invi5H/ssh-action@v1
-        with:
-          SSH_HOST: ${{ secrets.SERVER_ADDRESS }}
-          SSH_USER: ${{ secrets.SERVER_USER }}
-          SSH_KEY: ${{ secrets.SSH_SERVER_KEY }}
-          SSH_PORT: 22
-          - run: |
-            sudo mv /home/${{ secrets.SERVER_USER }}/* /usr/app-dev/
+          - run: sudo mkdir /usr/app-dev2
+      #       sudo rm -R /usr/app-dev*
+      #       sudo mkdir /usr/app-dev
+      #       sudo apt update
+      #       sudo apt upgrade -y
+      #       sudo apt install awscli -y
+      #       sudo apt install nodejs -y
+      #       sudo apt install npm -y
+      #       sudo apt update
+      #       aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY }} --profile bucketmg
+      #       aws configure set aws_secret_access_key ${{ secrets.BKTMG_SECRET_KEY }} --profile bucketmg
+      #       aws configure set region ${{ secrets.AWS_REGION }} --profile bucketmg
+      #       aws configure set output json --profile bucketmg
+      # - name: Deployment in home folder
+      #   uses: siva1024/scp-deployer@latest
+      #   with:
+      #     host: ${{ secrets.SERVER_ADDRESS }}
+      #     username: ${{ secrets.SERVER_USER }}
+      #     key: ${{ secrets.SSH_SERVER_KEY }}
+      #     source: "./*"
+      #     target: "/home/${{ secrets.SERVER_USER }}/"
+      # - name: Moving files to usr/app-dev
+      #   uses: invi5H/ssh-action@v1
+      #   with:
+      #     SSH_HOST: ${{ secrets.SERVER_ADDRESS }}
+      #     SSH_USER: ${{ secrets.SERVER_USER }}
+      #     SSH_KEY: ${{ secrets.SSH_SERVER_KEY }}
+      #     SSH_PORT: 22
+      #     - run: |
+      #       sudo mv /home/${{ secrets.SERVER_USER }}/* /usr/app-dev/
