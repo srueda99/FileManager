@@ -23,7 +23,7 @@ router.get('/', async (req, res) => {
 
 // (POST) Function to upload the file
 router.post('/', verifyFile, async (req, res) => {
-    console.log(req);
+    console.log(req.body);
     var bucket = req.body.bucket;
     var file = req.files.file;
     var result = await uploadObject(bucket, file);

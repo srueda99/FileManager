@@ -1,19 +1,19 @@
 // --- FRONTEND SCRIPT ---
 // Button to upload
 const uploadBtn = document.querySelector('#uploadSbmt');
-uploadBtn.addEventListener('click', e => {
+uploadBtn.addEventListener('click', async e => {
     e.preventDefault();
     const bucket = document.querySelector('#bucketUpload').value;
     const file = document.querySelector('#file').files[0];
     const formData = new FormData();
     formData.append('bucket', bucket);
     formData.append('file', file);
-    objectUpload(formData);
+    await objectUpload(formData);
     alert('File uploaded');
 });
 
 // Function for a upload request to de Backend
-const objectUpload = (formData) => {
+const objectUpload = async (formData) => {
     fetch('upload', {
         method: 'POST',
         body: formData

@@ -1,7 +1,6 @@
 // --- FUNCTIONS RELATED WITH AWS ---
 // Imports
 const s3 = require('aws-sdk/clients/s3');
-//const res = require('express/lib/response');
 const fs = require('fs');
 
 // Credentials
