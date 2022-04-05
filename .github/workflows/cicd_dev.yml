@@ -30,7 +30,7 @@ jobs:
             sudo apt upgrade -y
             sudo apt install awscli -y
             sudo apt install nodejs -y
-            sudo apt install npm -y
+            sudo apt install npm
             sudo apt update
             aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY }} --profile bucketmg
             aws configure set aws_secret_access_key ${{ secrets.BKTMG_SECRET_KEY }} --profile bucketmg
