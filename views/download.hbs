@@ -8,21 +8,19 @@
     </HEAD>
     <BODY>
         <DIV class="container-row"><H1 class="word">DOWNLOAD</H1><H1 class="word">FILES</H1><H1 class="word">FROM</H1><H1 class="word">S3</H1><H1 class="word">BUCKET</H1></DIV>
-        <DIV class="container" id="upload">
+        <DIV class="container box">
             <FORM>
                 <H3>You can download files only from this Bucket</H3>
-                <SELECT style="width: 350px;" class="form-select" aria-label="Disabled select example" name="buckets" id="bucketsDelete" disabled>
+                <SELECT style="width: 350px;" class="form-select" aria-label="Disabled select example" name="buckets" id="bucketDownload" disabled>
                     <OPTION selected value="{{bucket.Name}}">srueda-public-content</OPTION>
                 </SELECT>
-            </FORM>
-            <FORM>
                 <H3>Now select the object to download</H3>
-                <SELECT style="width: 350px;" class="form-select form-select-sm" aria-label=".form-select-sm example" name="buckets" id="buckets">
+                <SELECT style="width: 350px;" class="form-select form-select-sm" aria-label=".form-select-sm example" name="buckets" id="objectDownload">
                     {{#each objects}}
                         <OPTION value="{{this.Key}}">{{this.Key}}</OPTION>
                     {{/each}}
                 </SELECT>
-                <BUTTON class="btn btn-outline-warning" type="submit" id="deleteSbmt">DOWNLOAD</BUTTON>
+                <BUTTON class="hide-button" type="submit" id="downloadSbmt"><IMG class="animation" src="img/download.png" height="100px" width="100px"></BUTTON>
             </FORM>
         </DIV>
         <SCRIPT src="js/script-download.js"></SCRIPT>

@@ -8,10 +8,10 @@
     </HEAD>
     <BODY>
         <DIV class="container-row"><H1 class="word">UPLOAD</H1><H1 class="word">FILES</H1><H1 class="word">TO</H1><H1 class="word">S3</H1><H1 class="word">BUCKET</H1></DIV>
-        <DIV class="container" id="upload">
+        <DIV class="container box">
             <FORM>
                 <H3>Please select the Bucket</H3>
-                <SELECT style="width: 350px;" class="form-select form-select-sm" aria-label=".form-select-sm example" name="buckets" id="bucketsUpload">
+                <SELECT style="width: 350px;" class="form-select form-select-sm" aria-label=".form-select-sm example" name="buckets" id="bucketUpload">
                     {{#each buckets}}
                         <OPTION value="{{this.Name}}">{{this.Name}}</OPTION>
                     {{/each}}

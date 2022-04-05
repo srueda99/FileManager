@@ -3,16 +3,17 @@
 const uploadBtn = document.querySelector('#uploadSbmt');
 uploadBtn.addEventListener('click', e => {
     e.preventDefault();
-    const bucket = document.querySelector('#bucketsUpload').value;
+    const bucket = document.querySelector('#bucketUpload').value;
     const file = document.querySelector('#file').files[0];
     const formData = new FormData();
     formData.append('bucket', bucket);
     formData.append('file', file);
-    fileUp(formData);
+    objectUpload(formData);
+    alert('File uploaded');
 });
 
 // Function for a upload request to de Backend
-const fileUp = (formData) => {
+const objectUpload = (formData) => {
     fetch('upload', {
         method: 'POST',
         body: formData
@@ -24,4 +25,4 @@ const fileUp = (formData) => {
     .catch(err => console.log(`There was en error: ${err}`))
 };
 
-console.log('Script running as expected');
+console.log('Uploading script is running as expected');

@@ -1,6 +1,7 @@
 // --- FUNCTIONS RELATED WITH AWS ---
 // Imports
 const s3 = require('aws-sdk/clients/s3');
+//const res = require('express/lib/response');
 const fs = require('fs');
 
 // Credentials
@@ -22,16 +23,16 @@ const getBuckets = () => {
 
 // List all the objects in a bucket
 const getObjects = (bucket) => {
-    const bucketParams = {
+    var params = {
         Bucket: bucket,
     };
-    return storage.listObjects(bucketParams).promise();
+    return storage.listObjects(params).promise();
 };
 
 // Upload a file to the selected bucket
-const uploadToBucket = (bucket, file) => {
+const uploadObject = (bucket, file) => {
     var stream = fs.createReadStream(file.tempFilePath);
-    const params = {
+    var params = {
         Bucket: bucket,
         Key: file.name,
         Body: stream
@@ -39,4 +40,23 @@ const uploadToBucket = (bucket, file) => {
     return storage.upload(params).promise();
 };
 
-module.exports = {getBuckets, getObjects, uploadToBucket};
+// Delete an object of the bucket
+const deleteObject = (bucket, object) => {
+    var params = {
+        Bucket: bucket,
+        Key: object
+    };
+    return storage.deleteObject(params).promise();
+}
+
+// Download an object from the Bucket
+const downloadObject = async (bucket, object) => {
+    let file = fs.createWriteStream(object);
+    var params = {
+        Bucket: bucket,
+        Key: object
+    };
+    return storage.getObject(params).createReadStream().pipe(file);
+}
+
+module.exports = {getBuckets, getObjects, uploadObject, deleteObject, downloadObject};
