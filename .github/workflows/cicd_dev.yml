@@ -22,7 +22,7 @@ jobs:
           SSH_USER: ${{ secrets.SERVER_USER }}
           SSH_KEY: ${{ secrets.SSH_SERVER_KEY }}
           SSH_PORT: 22
-          script: |
+          - run: |
             sudo mkdir /usr/app-dev2
             sudo rm -R /usr/app-dev*
             sudo mkdir /usr/app-dev
@@ -51,5 +51,5 @@ jobs:
           SSH_USER: ${{ secrets.SERVER_USER }}
           SSH_KEY: ${{ secrets.SSH_SERVER_KEY }}
           SSH_PORT: 22
-          script: |
+          - run: |
             sudo mv /home/${{ secrets.SERVER_USER }}/* /usr/app-dev/
