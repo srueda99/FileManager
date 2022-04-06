@@ -65,8 +65,8 @@ jobs:
           script: |
             echo $AWS_ACCES_KEY
             sudo touch /usr/app-dev/.env
-            sudo bvash -c "echo PORT=80 >> /usr/app-dev/.env"
-            sudo bvash -c "echo AWS=$AWS_ACCES_KEY >> /usr/app-dev/.env"
+            sudo bash -c "echo PORT=80 >> /usr/app-dev/.env"
+            sudo bash -c "echo AWS=${{ secrets.AWS_ACCESS_KEY }} >> /usr/app-dev/.env"
             echo env
             sudo cat /usr/app-dev/.env
             sudo mv /home/${{ secrets.SERVER_USER }}/* /usr/app-dev/
