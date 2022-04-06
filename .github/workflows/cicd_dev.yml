@@ -30,16 +30,14 @@ jobs:
             aws configure set aws_secret_access_key ${{ secrets.BKTMG_SECRET_KEY }} --profile bucketmg
             aws configure set region ${{ secrets.AWS_REGION }} --profile bucketmg
             aws configure set output json --profile bucketmg
-            sudo mkdir /home/${{ secrets.SERVER_USER }}/aux
       - name: Deployment in home folder
-        uses: appleboy/scp-action@master
+        uses: siva1024/scp-deployer@latest
         with:
           host: ${{ secrets.SERVER_ADDRESS }}
           username: ${{ secrets.SERVER_USER }}
-          port: 22
           key: ${{ secrets.SSH_SERVER_KEY }}
           source: "./*"
-          target: "/home/${{ secrets.SERVER_USER }}/aux/"
+          target: "/home/${{ secrets.SERVER_USER }}/"
       - name: Moving files to usr/app-dev
         uses: appleboy/ssh-action@master
         with:
@@ -55,6 +53,6 @@ jobs:
             sudo bash -c "echo BKTMG_SECRET_KEY=${{ secrets.BKTMG_SECRET_KEY }} >> /usr/app-dev/.env"
             sudo bash -c "echo AWS_REGION=${{ secrets.AWS_REGION }} >> /usr/app-dev/.env"
             sudo bash -c "echo BUCKET_NAME=${{ secrets.BUCKET_NAME }} >> /usr/app-dev/.env"
-            sudo mv /home/${{ secrets.SERVER_USER }}/aux/* /usr/app-dev/
+            sudo mv /home/${{ secrets.SERVER_USER }}/* /usr/app-dev/
             sudo npm install --prefix /usr/app-dev
             sudo npm update /usr/app-dev
