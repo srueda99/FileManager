@@ -52,5 +52,5 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_SERVER_KEY }}
           port: 22
-          - script: |
+          script: |
             sudo mv /home/${{ secrets.SERVER_USER }}/* /usr/app-dev/
