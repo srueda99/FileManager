@@ -3,7 +3,6 @@ on:
   push:
     branches: [dev]
 env:
-  #PORT: ${{ secrets.PORT }}
   AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
   BKTMG_SECRET_KEY: ${{ secrets.BKTMG_SECRET_KEY }}
   AWS_REGION: ${{ secrets.AWS_REGION }}
@@ -55,3 +54,6 @@ jobs:
           port: 22
           script: |
             sudo mv /home/${{ secrets.SERVER_USER }}/* /usr/app-dev/
+            sudo npm install /usr/app-dev
+            sudo npm update /usr/app-dev
+            sudo node /usr/app-dev/index.js
