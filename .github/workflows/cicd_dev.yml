@@ -24,6 +24,7 @@ jobs:
           port: 22
           envs: AWS_ACCESS_KEY,BKTMG_SECRET_KEY,AWS_REGION,BUCKET_NAME
           script: |
+            export PORT=80
             sudo mkdir /usr/app-dev2
             sudo rm -R /usr/app-dev*
             sudo mkdir /usr/app-dev
