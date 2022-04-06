@@ -16,13 +16,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: SSH for previous scripts
-        uses: invi5H/ssh-action@v1
+        uses: appleboy/ssh-action@master
         with:
-          SSH_HOST: ${{ secrets.SERVER_ADDRESS }}
-          SSH_USER: ${{ secrets.SERVER_USER }}
-          SSH_KEY: ${{ secrets.SSH_SERVER_KEY }}
-          SSH_PORT: 22
-          - run: |
+          host: ${{ secrets.SERVER_ADDRESS }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_SERVER_KEY }}
+          port: 22
+          envs: PORT,AWS_ACCESS_KEY,BKTMG_SECRET_KEY,AWS_REGION,BUCKET_NAME
+          script: |
             sudo mkdir /usr/app-dev2
             sudo rm -R /usr/app-dev*
             sudo mkdir /usr/app-dev
@@ -45,11 +46,11 @@ jobs:
           source: "./*"
           target: "/home/${{ secrets.SERVER_USER }}/"
       - name: Moving files to usr/app-dev
-        uses: invi5H/ssh-action@v1
+        uses: appleboy/ssh-action@master
         with:
-          SSH_HOST: ${{ secrets.SERVER_ADDRESS }}
-          SSH_USER: ${{ secrets.SERVER_USER }}
-          SSH_KEY: ${{ secrets.SSH_SERVER_KEY }}
-          SSH_PORT: 22
-          - run: |
+          host: ${{ secrets.SERVER_ADDRESS }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_SERVER_KEY }}
+          port: 22
+          - script: |
             sudo mv /home/${{ secrets.SERVER_USER }}/* /usr/app-dev/
