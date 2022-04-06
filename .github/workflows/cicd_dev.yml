@@ -7,6 +7,8 @@ env:
   BKTMG_SECRET_KEY: ${{ secrets.BKTMG_SECRET_KEY }}
   AWS_REGION: ${{ secrets.AWS_REGION }}
   BUCKET_NAME: ${{ secrets.BUCKET_NAME }}
+  WORDD: ContYouSeeThis
+  WORDDD: "YouCant"
 jobs:
     build:
       name: Deploying DEV
@@ -17,19 +19,24 @@ jobs:
       - name: SSH for previous scripts
         uses: appleboy/ssh-action@master
         env:
-          WORD: "CanYouSeeThis"
+          WORD: CanYouSeeThis
         with:
           host: ${{ secrets.SERVER_ADDRESS }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_SERVER_KEY }}
           port: 22
-          envs: AWS_ACCESS_KEY,BKTMG_SECRET_KEY,AWS_REGION,BUCKET_NAME
+          envs: AWS_ACCESS_KEY,BKTMG_SECRET_KEY,AWS_REGION,WORDDD
           script: |
             echo word
             echo $WORD
+            echo word2
+            echo $WORDD
+            echo word3
+            echo $WORDDD
             echo key
             echo $AWS_ACCESS_KEY
-            export PORT=80
+            echo bucket
+            echo $BUCKET_NAME
             sudo mkdir /usr/app-dev2
             sudo rm -R /usr/app-dev*
             sudo mkdir /usr/app-dev
@@ -60,7 +67,8 @@ jobs:
           port: 22
           script: |
             sudo touch /usr/app-dev/.env
-            sudo echo PORT=80 >> /usr/app-dev/.env
+            sudo echo PORT="80" >> /usr/app-dev/.env
+            echo env
             sudo cat /usr/app-dev/.env
             sudo mv /home/${{ secrets.SERVER_USER }}/* /usr/app-dev/
             sudo npm install --prefix /usr/app-dev
