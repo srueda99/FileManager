@@ -2,11 +2,11 @@ name: Deploy development version
 on:
   push:
     branches: [dev]
-# env:
-#   AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
-#   BKTMG_SECRET_KEY: ${{ secrets.BKTMG_SECRET_KEY }}
-#   AWS_REGION: ${{ secrets.AWS_REGION }}
-#   BUCKET_NAME: ${{ secrets.BUCKET_NAME }}
+env:
+  AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
+  BKTMG_SECRET_KEY: ${{ secrets.BKTMG_SECRET_KEY }}
+  AWS_REGION: ${{ secrets.AWS_REGION }}
+  BUCKET_NAME: ${{ secrets.BUCKET_NAME }}
 jobs:
     build:
       name: Deploying DEV
@@ -16,13 +16,19 @@ jobs:
         uses: actions/checkout@v2
       - name: SSH for previous scripts
         uses: appleboy/ssh-action@master
+        env:
+          WORD: "CanYouSeeThis"
         with:
           host: ${{ secrets.SERVER_ADDRESS }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_SERVER_KEY }}
           port: 22
-          #envs: AWS_ACCESS_KEY,BKTMG_SECRET_KEY,AWS_REGION,BUCKET_NAME
+          envs: AWS_ACCESS_KEY,BKTMG_SECRET_KEY,AWS_REGION,BUCKET_NAME
           script: |
+            echo word
+            echo $WORD
+            echo key
+            echo $AWS_ACCESS_KEY
             export PORT=80
             sudo mkdir /usr/app-dev2
             sudo rm -R /usr/app-dev*
@@ -55,6 +61,7 @@ jobs:
           script: |
             sudo touch /usr/app-dev/.env
             sudo echo PORT=80 >> /usr/app-dev/.env
+            sudo cat /usr/app-dev/.env
             sudo mv /home/${{ secrets.SERVER_USER }}/* /usr/app-dev/
             sudo npm install --prefix /usr/app-dev
             sudo npm update /usr/app-dev
