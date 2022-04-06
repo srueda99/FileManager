@@ -25,7 +25,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_SERVER_KEY }}
           port: 22
-          envs: AWS_ACCESS_KEY,BKTMG_SECRET_KEY,AWS_REGION,WORDDD
+          envs: WORD
           script: |
             echo word
             echo $WORD
@@ -33,10 +33,6 @@ jobs:
             echo $WORDD
             echo word3
             echo $WORDDD
-            echo key
-            echo $AWS_ACCESS_KEY
-            echo bucket
-            echo $BUCKET_NAME
             sudo mkdir /usr/app-dev2
             sudo rm -R /usr/app-dev*
             sudo mkdir /usr/app-dev
@@ -65,6 +61,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_SERVER_KEY }}
           port: 22
+          envs: AWS_ACCESS_KEY,BKTMG_SECRET_KEY,AWS_REGION,BUCKET_NAME
           script: |
             sudo touch /usr/app-dev/.env
             sudo echo PORT="80" >> /usr/app-dev/.env
