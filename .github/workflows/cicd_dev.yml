@@ -2,12 +2,12 @@ name: Deploy development version
 on:
   push:
     branches: [dev]
-env:
-  PORT: ${{ secrets.PORT }}
-  AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
-  BKTMG_SECRET_KEY: ${{ secrets.BKTMG_SECRET_KEY }}
-  AWS_REGION: ${{ secrets.AWS_REGION }}
-  BUCKET_NAME: ${{ secrets.BUCKET_NAME }}
+# env:
+#   PORT: ${{ secrets.PORT }}
+#   AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
+#   BKTMG_SECRET_KEY: ${{ secrets.BKTMG_SECRET_KEY }}
+#   AWS_REGION: ${{ secrets.AWS_REGION }}
+#   BUCKET_NAME: ${{ secrets.BUCKET_NAME }}
 jobs:
     build:
       name: Deploying DEV
@@ -22,7 +22,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_SERVER_KEY }}
           port: 22
-          envs: PORT,AWS_ACCESS_KEY,BKTMG_SECRET_KEY,AWS_REGION,BUCKET_NAME
+          #envs: PORT,AWS_ACCESS_KEY,BKTMG_SECRET_KEY,AWS_REGION,BUCKET_NAME
           script: |
             sudo mkdir /usr/app-dev2
             sudo rm -R /usr/app-dev*
