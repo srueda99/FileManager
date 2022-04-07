@@ -4,7 +4,7 @@ on:
     branches: [dev]
 jobs:
     build:
-      name: Deploying DEV
+      name: Previous cleaning
       runs-on: ubuntu-latest
       steps:
       - name: Checkout repository
@@ -17,20 +17,9 @@ jobs:
           key: ${{ secrets.SSH_SERVER_KEY }}
           port: 22
           script: |
-            sudo mkdir /usr/app-dev2
-            sudo rm -R /usr/app-dev*
-            sudo mkdir /usr/app-dev
-            sudo apt-get update
-            sudo apt-get upgrade -y
-            curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
-            sudo apt-get install awscli -y
-            sudo apt-get install nodejs -y
-            sudo apt-get install npm -y
-            sudo apt-get update
-            aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY }}
-            aws configure set aws_secret_access_key ${{ secrets.BKTMG_SECRET_KEY }}
-            aws configure set region ${{ secrets.AWS_REGION }}
-            aws configure set output json
+            sudo mkdir /usr/app/dev2
+            sudo rm -R /usr/app/dev*
+            sudo mkdir /usr/app/dev
       - name: Deployment in home folder
         uses: siva1024/scp-deployer@latest
         with:
@@ -39,7 +28,7 @@ jobs:
           key: ${{ secrets.SSH_SERVER_KEY }}
           source: "./*"
           target: "/home/${{ secrets.SERVER_USER }}/"
-      - name: Moving files to usr/app-dev
+      - name: Moving files to usr/app/dev
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SERVER_ADDRESS }}
@@ -47,11 +36,6 @@ jobs:
           key: ${{ secrets.SSH_SERVER_KEY }}
           port: 22
           script: |
-            sudo touch /usr/app-dev/.env
-            sudo bash -c "echo PORT="80" >> /usr/app-dev/.env"
-            sudo bash -c "echo AWS_ACCESS_KEY="${{ secrets.AWS_ACCESS_KEY }}" >> /usr/app-dev/.env"
-            sudo bash -c "echo BKTMG_SECRET_KEY="${{ secrets.BKTMG_SECRET_KEY }}" >> /usr/app-dev/.env"
-            sudo bash -c "echo AWS_REGION="${{ secrets.AWS_REGION }}" >> /usr/app-dev/.env"
-            sudo bash -c "echo BUCKET_NAME="${{ secrets.BUCKET_NAME }}" >> /usr/app-dev/.env"
-            sudo mv /home/${{ secrets.SERVER_USER }}/* /usr/app-dev/
-            sudo npm install --prefix /usr/app-dev
+            sudo mv /home/${{ secrets.SERVER_USER }}/* /usr/app/dev/
+            sudo mv /usr/app/.env /usr/app/dev/
+            sudo npm install --prefix /usr/app/dev
