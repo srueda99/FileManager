@@ -56,4 +56,3 @@ jobs:
             sudo bash -c "echo BUCKET_NAME="${{ secrets.BUCKET_NAME }}" >> /usr/app-dev/.env"
             sudo mv /home/${{ secrets.SERVER_USER }}/* /usr/app-dev/
             sudo npm install --prefix /usr/app-dev
-            sudo npm update /usr/app-dev
