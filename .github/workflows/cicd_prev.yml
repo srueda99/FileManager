@@ -1,0 +1,39 @@
+name: Set up the work environment
+on:
+  push:
+    branches: [prev]
+jobs:
+    build:
+      name: Setting up the previous configurations
+      runs-on: ubuntu-latest
+      steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: SSH for previous scripts
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_ADDRESS }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_SERVER_KEY }}
+          port: 22
+          script: |
+            sudo mkdir /usr/app2
+            sudo rm -R /usr/app*
+            sudo mkdir /usr/app
+            sudo apt-get update
+            sudo apt-get upgrade -y
+            curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+            sudo apt-get install awscli -y
+            sudo apt-get install nodejs -y
+            sudo apt-get install npm -y
+            sudo apt-get update
+            aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY }}
+            aws configure set aws_secret_access_key ${{ secrets.BKTMG_SECRET_KEY }}
+            aws configure set region ${{ secrets.AWS_REGION }}
+            aws configure set output json
+            sudo touch /usr/app/.env
+            sudo bash -c "echo PORT="80" >> /usr/app/.env"
+            sudo bash -c "echo AWS_ACCESS_KEY="${{ secrets.AWS_ACCESS_KEY }}" >> /usr/app/.env"
+            sudo bash -c "echo BKTMG_SECRET_KEY="${{ secrets.BKTMG_SECRET_KEY }}" >> /usr/app/.env"
+            sudo bash -c "echo AWS_REGION="${{ secrets.AWS_REGION }}" >> /usr/app/.env"
+            sudo bash -c "echo BUCKET_NAME="${{ secrets.BUCKET_NAME }}" >> /usr/app/.env"
