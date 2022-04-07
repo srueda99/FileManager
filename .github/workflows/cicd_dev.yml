@@ -27,10 +27,10 @@ jobs:
             sudo apt-get install nodejs -y
             sudo apt-get install npm -y
             sudo apt-get update
-            aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY }} --profile bucketmg
-            aws configure set aws_secret_access_key ${{ secrets.BKTMG_SECRET_KEY }} --profile bucketmg
-            aws configure set region ${{ secrets.AWS_REGION }} --profile bucketmg
-            aws configure set output json --profile bucketmg
+            aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY }}
+            aws configure set aws_secret_access_key ${{ secrets.BKTMG_SECRET_KEY }}
+            aws configure set region ${{ secrets.AWS_REGION }}
+            aws configure set output json
       - name: Deployment in home folder
         uses: siva1024/scp-deployer@latest
         with:
