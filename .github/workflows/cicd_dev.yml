@@ -22,6 +22,7 @@ jobs:
             sudo mkdir /usr/app-dev
             sudo apt-get update
             sudo apt-get upgrade -y
+            curl -sL https://deb.nodesource.com/setup_17.x | sudo -E bash -
             sudo apt-get install awscli -y
             sudo apt-get install nodejs -y
             sudo apt-get install npm -y
@@ -48,12 +49,11 @@ jobs:
           envs: AWS_ACCESS_KEY,BKTMG_SECRET_KEY,AWS_REGION,BUCKET_NAME
           script: |
             sudo touch /usr/app-dev/.env
-            sudo bash -c "echo PORT=80 >> /usr/app-dev/.env"
-            sudo bash -c "echo AWS_ACCESS_KEY=${{ secrets.AWS_ACCESS_KEY }} >> /usr/app-dev/.env"
-            sudo bash -c "echo BKTMG_SECRET_KEY=${{ secrets.BKTMG_SECRET_KEY }} >> /usr/app-dev/.env"
-            sudo bash -c "echo AWS_REGION=${{ secrets.AWS_REGION }} >> /usr/app-dev/.env"
-            sudo bash -c "echo BUCKET_NAME=${{ secrets.BUCKET_NAME }} >> /usr/app-dev/.env"
+            sudo bash -c "echo PORT="80" >> /usr/app-dev/.env"
+            sudo bash -c "echo AWS_ACCESS_KEY="${{ secrets.AWS_ACCESS_KEY }}" >> /usr/app-dev/.env"
+            sudo bash -c "echo BKTMG_SECRET_KEY="${{ secrets.BKTMG_SECRET_KEY }}" >> /usr/app-dev/.env"
+            sudo bash -c "echo AWS_REGION="${{ secrets.AWS_REGION }}" >> /usr/app-dev/.env"
+            sudo bash -c "echo BUCKET_NAME="${{ secrets.BUCKET_NAME }}" >> /usr/app-dev/.env"
             sudo mv /home/${{ secrets.SERVER_USER }}/* /usr/app-dev/
             sudo npm install --prefix /usr/app-dev
             sudo npm update /usr/app-dev
-            sudo node /usr/app-dev/index.js &
