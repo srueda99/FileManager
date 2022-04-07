@@ -4,7 +4,7 @@ on:
     branches: [stg]
 jobs:
     build:
-      name: Deploying STG
+      name: Previous cleaning
       runs-on: ubuntu-latest
       steps:
       - name: Checkout repository
@@ -17,9 +17,9 @@ jobs:
           key: ${{ secrets.SSH_SERVER_KEY }}
           port: 22
           script: |
-            sudo mkdir /usr/app-stg2
-            sudo rm -R /usr/app-stg*
-            sudo mkdir /usr/app-stg
+            sudo mkdir /usr/app/stg2
+            sudo rm -R /usr/app/stg*
+            sudo mkdir /usr/app/stg
       - name: Deployment in home folder
         uses: siva1024/scp-deployer@latest
         with:
@@ -28,7 +28,7 @@ jobs:
           key: ${{ secrets.SSH_SERVER_KEY }}
           source: "./*"
           target: "/home/${{ secrets.SERVER_USER }}/"
-      - name: Moving files to usr/app-stg
+      - name: Moving files to usr/app/stg
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SERVER_ADDRESS }}
@@ -36,6 +36,6 @@ jobs:
           key: ${{ secrets.SSH_SERVER_KEY }}
           port: 22
           script: |
-            sudo mv /home/${{ secrets.SERVER_USER }}/* /usr/app-stg/
-            sudo cp /usr/app-dev/.env /usr/app-stg/.env
-            sudo npm install --prefix /usr/app-stg
+            sudo mv /home/${{ secrets.SERVER_USER }}/* /usr/app/stg/
+            sudo cp /usr/app/dev/.env /usr/app/stg/
+            sudo npm install --prefix /usr/app/stg
