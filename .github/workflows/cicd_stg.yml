@@ -17,7 +17,6 @@ jobs:
           key: ${{ secrets.SSH_SERVER_KEY }}
           port: 22
           script: |
-            sudo mkdir /usr/app/stg2
             sudo rm -R /usr/app/stg*
             sudo mkdir /usr/app/stg
       - name: Deployment in home folder
@@ -37,5 +36,5 @@ jobs:
           port: 22
           script: |
             sudo mv /home/${{ secrets.SERVER_USER }}/* /usr/app/stg/
-            sudo cp /usr/app/dev/.env /usr/app/stg/
+            sudo mv /usr/app/dev/.env /usr/app/stg/
             sudo npm install --prefix /usr/app/stg
