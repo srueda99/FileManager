@@ -34,7 +34,6 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_SERVER_KEY }}
           port: 22
-          # ddddd
           script: |
             sudo mv /home/${{ secrets.SERVER_USER }}/* /usr/app/stg/
             sudo mv /usr/app/dev/.env /usr/app/stg/
