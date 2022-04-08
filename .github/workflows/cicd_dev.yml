@@ -37,5 +37,5 @@ jobs:
           port: 22
           script: |
             sudo mv /home/${{ secrets.SERVER_USER }}/* /usr/app/dev/
-            sudo mv /usr/app/.env /usr/app/dev/
+            sudo cp /usr/app/.env /usr/app/dev/
             sudo npm install --prefix /usr/app/dev
