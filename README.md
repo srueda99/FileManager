@@ -14,6 +14,7 @@ The last brach is the **main** branch, here we have the final and production ver
 
 ## Programs and libraries
 - NodeJS
+- AWS CLI
 - Bootstrap
 - HTML, CSS, JS
 - Express
