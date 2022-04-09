@@ -17,7 +17,6 @@ jobs:
           key: ${{ secrets.SSH_SERVER_KEY }}
           port: 22
           script: |
-            sudo mkdir /usr/app/prod2
             sudo rm -R /usr/app/prod*
             sudo mkdir /usr/app/prod
       - name: Deployment in home folder
