@@ -1,7 +1,7 @@
-name: Deploy development version
+name: Deploy stage version
 on:
-  push:
-    branches: [dev]
+  pull_request:
+    branches: [stg]
 jobs:
     build:
       name: Previous cleaning
@@ -17,8 +17,8 @@ jobs:
           key: ${{ secrets.SSH_SERVER_KEY }}
           port: 22
           script: |
-            sudo rm -R /usr/app/dev*
-            sudo mkdir /usr/app/dev
+            sudo rm -R /usr/app/stg*
+            sudo mkdir /usr/app/stg
       - name: Deployment in home folder
         uses: siva1024/scp-deployer@latest
         with:
@@ -27,7 +27,7 @@ jobs:
           key: ${{ secrets.SSH_SERVER_KEY }}
           source: "./*"
           target: "/home/${{ secrets.SERVER_USER }}/"
-      - name: Moving files to usr/app/dev
+      - name: Moving files to usr/app/stg
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SERVER_ADDRESS }}
@@ -35,6 +35,6 @@ jobs:
           key: ${{ secrets.SSH_SERVER_KEY }}
           port: 22
           script: |
-            sudo mv /home/${{ secrets.SERVER_USER }}/* /usr/app/dev/
-            sudo cp /usr/app/.env /usr/app/dev/
-            sudo npm install --prefix /usr/app/dev
+            sudo mv /home/${{ secrets.SERVER_USER }}/* /usr/app/stg/
+            sudo mv /usr/app/dev/.env /usr/app/stg/
+            sudo npm install --prefix /usr/app/stg
